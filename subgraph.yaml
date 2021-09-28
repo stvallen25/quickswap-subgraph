@@ -1,14 +1,14 @@
 specVersion: 0.0.2
-description: Quickswap is a decentralized protocol for automated token exchange on Matic.
+description: Quickswap is a decentralized protocol for automated token exchange on mumbai.
 repository: https://github.com/QuickSwap/QuickSwap-subgraph.git
 schema:
   file: ./schema.graphql
 dataSources:
   - kind: ethereum/contract
     name: Factory
-    network: matic
+    network: mumbai
     source:
-      address: '0x5757371414417b8C6CAad45bAeF941aBc7d3Ab32'
+      address: '0x2900A08e946F2C5b0f53f4f6BC917c1CF35d0322'
       abi: Factory
       startBlock: 5484576
     mapping:
@@ -21,7 +21,7 @@ dataSources:
         - Token
       abis:
         - name: Factory
-          file: ./abis/factory.json
+          file: ./abis/UniswapV2Factory.json
         - name: ERC20
           file: ./abis/ERC20.json
         - name: ERC20SymbolBytes
@@ -34,7 +34,7 @@ dataSources:
 templates:
   - kind: ethereum/contract
     name: Pair
-    network: matic
+    network: mumbai
     source:
       abi: Pair
     mapping:
@@ -47,9 +47,9 @@ templates:
         - Token
       abis:
         - name: Pair
-          file: ./abis/pair.json
+          file: ./abis/UniswapV2Pair.json
         - name: Factory
-          file: ./abis/factory.json
+          file: ./abis/UniswapV2Factory.json
       eventHandlers:
         - event: Mint(indexed address,uint256,uint256)
           handler: handleMint
